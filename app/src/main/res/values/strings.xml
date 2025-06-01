@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Semana10_lab</string>
+    <string name="titulo_crimen">Detalle del Crimen</string>
+    <string name="regresar">Regresar</string>
+</resources>
