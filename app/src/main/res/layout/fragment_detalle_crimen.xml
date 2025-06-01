@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.screens.DetalleCrimenFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <!-- Barra de navegación -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="?android:attr/colorPrimary"
+        android:background="@color/toolbarColor"
         android:elevation="15dp"
         android:gravity="center_vertical"
         app:titleTextColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -28,71 +27,107 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="lab-10"
-                android:textColor="#FFFFFF"
+                android:text="Agregar crimen"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Contenedor con margen para los elementos -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:textColor="@color/black">
 
-        <!-- Título del crimen -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="Título del crimen" />
-
-        <!-- Campo de texto para ingresar el título del crimen -->
-        <EditText
-            android:id="@+id/txt_titulo_crimen"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Escribe el título del crimen"
             android:importantForAccessibility="no"
-            android:inputType="text" />
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/buttonBlue"
+            app:boxStrokeWidth="2dp">
 
-        <!-- Fecha del crimen -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_titulo_crimen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textColorHint="@color/darkerGray"
+                android:textSize="16sp"
+                android:importantForAccessibility="no"
+                android:background="@android:color/transparent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="Fecha del crimen" />
+            android:text="Fecha del crimen"
+            android:textColor="@color/blue"/>
 
-        <!-- Botón para seleccionar la fecha del crimen -->
         <Button
             android:id="@+id/btn_detalle_crimen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Selecciona la fecha"
-            android:enabled="true" />
+            android:backgroundTint="@color/buttonBlue"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:elevation="6dp" />
 
-        <!-- Checkbox para marcar si el crimen está resuelto -->
         <CheckBox
             android:id="@+id/chk_resuelto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crimen resuelto" />
+            android:text="Crimen resuelto"
+            android:textColor="@color/blue" />
 
-        <!-- Espacio flexible para que los elementos se ajusten -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <!-- Botón para guardar el crimen -->
-        <Button
-            android:id="@+id/btnGuardarCrimen"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar Crimen" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnGuardarCrimen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar Crimen"
+                android:backgroundTint="@color/buttonBlue"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:elevation="6dp"
+                android:shape="rectangle"/>
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@color/buttonBlue"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:elevation="6dp"
+                android:shape="rectangle"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

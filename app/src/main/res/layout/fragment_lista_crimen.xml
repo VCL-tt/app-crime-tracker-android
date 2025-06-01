@@ -1,10 +1,9 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:attr/windowBackground">
+    android:background="@color/backgroundColor">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -14,8 +13,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="?android:attr/colorPrimary"
-            android:elevation="15dp"
+            android:background="@color/toolbarColor"
+            android:elevation="8dp"
             android:minHeight="20dp"
             app:titleTextColor="@android:color/white"
             android:gravity="center">
@@ -30,10 +29,10 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="lab-10"
-                    android:textColor="#FFFFFF"
+                    android:text="Crime Tracker"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -42,17 +41,17 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAgregarCrimen"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Agregar Crimen"
-        android:layout_margin="16dp"
-        android:drawableStart="@drawable/ic_add"
-        android:background="@drawable/btn_bg"
+        android:backgroundTint="@color/buttonBlue"
         android:textColor="@android:color/white"
-        android:padding="12dp"
-        android:textSize="16sp" />
+        android:layout_margin="16dp"
+        android:elevation="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/crimen_recycler_view"
@@ -65,4 +64,5 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:scrollbars="vertical" />
+
 </LinearLayout>

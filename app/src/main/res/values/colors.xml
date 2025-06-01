@@ -1,6 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Colores principales -->
+    <color name="colorAccent">#FF7043</color> <!-- Naranja suave para resaltar elementos importantes -->
+
+    <!-- Fondo principal -->
+    <color name="backgroundColor">#F5F5F5</color> <!-- Gris claro, limpio y moderno -->
+
+    <!-- Barra de herramientas -->
+    <color name="toolbarColor">#3F51B5</color> <!-- Azul oscuro, da contraste y profesionalismo -->
+
+    <!-- Colores para texto -->
+    <color name="white">#FFFFFF</color> <!-- Blanco, usado para texto sobre fondos oscuros -->
+    <color name="black">#000000</color> <!-- Negro, para texto importante y contraste -->
+    <color name="textPrimaryColor">#212121</color> <!-- Gris oscuro para el texto principal -->
+    <color name="textSecondaryColor">#757575</color> <!-- Gris suave para texto secundario -->
+
+    <!-- Botones -->
+    <color name="buttonColor">#FF9800</color> <!-- Naranja brillante, atractivo y legible sobre texto blanco -->
+    <color name="buttonPressedColor">#FB8C00</color> <!-- Naranja más oscuro para cuando el botón está presionado -->
+
+    <!-- Divider -->
+    <color name="dividerColor">#BDBDBD</color> <!-- Gris suave para divisores y líneas de separación -->
+
+    <!-- Gris oscuro para textos secundarios -->
+    <color name="darkGray">#616161</color> <!-- Gris oscuro para elementos de texto menos importantes -->
+    <color name="buttonColorBlue">#0A66AF</color> <!-- Azul claro vibrante -->
+    <color name="blue">#2196F3</color>
+    <color name="buttonBlue">#2196F3</color>
+    <color name="darkerGray">#757575</color>
 </resources>

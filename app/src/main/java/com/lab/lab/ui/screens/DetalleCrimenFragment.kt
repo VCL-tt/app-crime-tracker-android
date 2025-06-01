@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lab.lab.databinding.FragmentDetalleCrimenBinding
 import com.lab.lab.model.Crimen
-
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,13 +41,16 @@ class DetalleCrimenFragment : Fragment() {
     ): View {
         _binding = FragmentDetalleCrimenBinding.inflate(inflater, container, false)
 
+        // Actualizar el título del crimen cuando el texto cambie
         binding.txtTituloCrimen.doOnTextChanged { texto, _, _, _ ->
             crimen = crimen.copy(titulo = texto.toString())
         }
 
+        // Formato para la fecha y hora
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
         binding.btnDetalleCrimen.text = dateFormat.format(crimen.fecha)
 
+        // Configuración del botón para seleccionar la fecha y hora
         binding.btnDetalleCrimen.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
@@ -56,7 +58,7 @@ class DetalleCrimenFragment : Fragment() {
                     calendar.set(year, monthOfYear, dayOfMonth)
                     val selectedDate = calendar.time
 
-
+                    // Diálogo para seleccionar la hora después de la fecha
                     val timePickerDialog = TimePickerDialog(
                         requireContext(),
                         { _, hourOfDay, minute ->
@@ -67,6 +69,7 @@ class DetalleCrimenFragment : Fragment() {
                             val formattedDate = dateFormat.format(selectedDateTime)
                             binding.btnDetalleCrimen.text = formattedDate
 
+                            // Guardamos la fecha y la hora seleccionada
                             crimen = crimen.copy(fecha = selectedDateTime)
                         },
                         calendar.get(Calendar.HOUR_OF_DAY),
@@ -82,24 +85,47 @@ class DetalleCrimenFragment : Fragment() {
             datePickerDialog.show()
         }
 
+        // Control de cambio en el estado del crimen (resuelto o no)
         binding.chkResuelto.setOnCheckedChangeListener { _, marcado ->
             crimen = crimen.copy(resuelto = marcado)
         }
 
+        // Botón para guardar el crimen
         binding.btnGuardarCrimen.setOnClickListener {
-            viewModel.agregarCrimen(crimen)
+            // Verificar si el título está vacío
+            if (binding.txtTituloCrimen.text.isNullOrEmpty()) {
+                // Si el título está vacío, mostrar un Snackbar de advertencia
+                Snackbar.make(binding.root, "Por favor ingrese un título para el crimen", Snackbar.LENGTH_SHORT)
+                    .show()
+            } else {
+                // Si el título no está vacío, procedemos a guardar el crimen
+                viewModel.agregarCrimen(crimen)
 
-            Snackbar.make(binding.root, "Crimen guardado con éxito", Snackbar.LENGTH_SHORT)
-                .setAction("Cerrar") {}
-                .show()
+                // Mostrar el Snackbar de confirmación
+                Snackbar.make(binding.root, "Crimen guardado con éxito", Snackbar.LENGTH_SHORT)
+                    .setAction("Cerrar") {}
+                    .show()
 
+                // Redirigir a la lista de crímenes después de guardar usando FragmentTransaction
+                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment()) // Reemplazar con el fragmento de lista
+                fragmentTransaction.addToBackStack(null) // Permite ir atrás
+                fragmentTransaction.commit()
+
+                Log.d("DetalleCrimenFragment", "Redirigiendo a ListaCrimenFragment")
+            }
+        }
+        binding.btnCancelar.setOnClickListener {
+            // Redirigir a la lista de crímenes
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment())
-            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment()) // Reemplazar con el fragmento de lista
+            fragmentTransaction.addToBackStack(null) // Permite ir atrás
             fragmentTransaction.commit()
+
             Log.d("DetalleCrimenFragment", "Redirigiendo a ListaCrimenFragment")
         }
 
+        // Bloquear la navegación con onBackPressed si el título está vacío
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (binding.txtTituloCrimen.text.isNullOrEmpty()) {
@@ -113,6 +139,7 @@ class DetalleCrimenFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
