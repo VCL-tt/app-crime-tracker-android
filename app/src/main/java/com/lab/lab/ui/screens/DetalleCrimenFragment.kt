@@ -46,30 +46,59 @@ class DetalleCrimenFragment : Fragment() {
             crimen = crimen.copy(titulo = texto.toString())
         }
 
-        // Formato para la fecha y hora
+        // Mostrar fecha inicial
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-        binding.btnDetalleCrimen.text = dateFormat.format(crimen.fecha)
+        binding.txtFechaCrimen.text = dateFormat.format(crimen.fecha)
 
-        // Configuración del botón para seleccionar la fecha y hora
-        binding.btnDetalleCrimen.setOnClickListener {
+        binding.layoutFecha.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { _, year, monthOfYear, dayOfMonth ->
                     calendar.set(year, monthOfYear, dayOfMonth)
-                    val selectedDate = calendar.time
 
-                    // Diálogo para seleccionar la hora después de la fecha
                     val timePickerDialog = TimePickerDialog(
                         requireContext(),
+                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                         { _, hourOfDay, minute ->
                             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                             calendar.set(Calendar.MINUTE, minute)
                             val selectedDateTime = calendar.time
 
-                            val formattedDate = dateFormat.format(selectedDateTime)
-                            binding.btnDetalleCrimen.text = formattedDate
+                            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                            binding.txtFechaCrimen.text = dateFormat.format(selectedDateTime)
 
-                            // Guardamos la fecha y la hora seleccionada
+                            crimen = crimen.copy(fecha = selectedDateTime)
+                        },
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        true
+                    )
+                    timePickerDialog.show()
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+
+        binding.iconoFecha.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                { _, year, monthOfYear, dayOfMonth ->
+                    calendar.set(year, monthOfYear, dayOfMonth)
+
+                    val timePickerDialog = TimePickerDialog(
+                        requireContext(),
+                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                        { _, hourOfDay, minute ->
+                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                            calendar.set(Calendar.MINUTE, minute)
+                            val selectedDateTime = calendar.time
+
+                            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                            binding.txtFechaCrimen.text = dateFormat.format(selectedDateTime)
+
                             crimen = crimen.copy(fecha = selectedDateTime)
                         },
                         calendar.get(Calendar.HOUR_OF_DAY),

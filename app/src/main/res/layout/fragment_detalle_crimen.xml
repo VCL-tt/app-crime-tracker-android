@@ -1,133 +1,187 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.screens.DetalleCrimenFragment"
     android:orientation="vertical"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
         android:background="@color/toolbarColor"
-        android:elevation="15dp"
-        android:gravity="center_vertical"
-        app:titleTextColor="@android:color/white">
+        android:paddingVertical="10dp">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="56dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Agregar crimen"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:textColor="@color/black">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Escribe el título del crimen"
-            android:importantForAccessibility="no"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/buttonBlue"
-            app:boxStrokeWidth="2dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txt_titulo_crimen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textColorHint="@color/darkerGray"
+                android:text="Crime Tracker"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Crimen"
+        android:textColor="@color/primaryDarkBlue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="12dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:boxBackgroundColor="@color/lightGray"
+                app:boxBackgroundMode="filled"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/primaryBlue"
+                app:boxStrokeWidth="2dp"
+                android:elevation="2dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtTituloCrimen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkText"
+                    android:textColorHint="@color/grayHint"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:hint="Escribe el crimen"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha del crimen"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/primaryBlue"
+                android:layout_marginBottom="12dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
+
+            <LinearLayout
+                android:id="@+id/layoutFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtFechaCrimen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selecciona la fecha"
+                    android:textColor="@color/primaryBlue"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
+
+                <ImageView
+                    android:id="@+id/iconoFecha"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_calendar"
+                    android:contentDescription="Icono calendario"
+
+                    android:layout_marginStart="16dp" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chk_resuelto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crimen resuelto"
+                android:textColor="@color/primaryBlue"
                 android:textSize="16sp"
-                android:importantForAccessibility="no"
-                android:background="@android:color/transparent"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginBottom="32dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:text="Fecha del crimen"
-            android:textColor="@color/blue"/>
-
-        <Button
-            android:id="@+id/btn_detalle_crimen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecciona la fecha"
-            android:backgroundTint="@color/buttonBlue"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="12dp"
-            android:elevation="6dp" />
-
-        <CheckBox
-            android:id="@+id/chk_resuelto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Crimen resuelto"
-            android:textColor="@color/blue" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btnGuardarCrimen"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guardar Crimen"
-                android:backgroundTint="@color/buttonBlue"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:padding="12dp"
-                android:elevation="6dp"
-                android:shape="rectangle"/>
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/btnCancelar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancelar"
-                android:backgroundTint="@android:color/white"
-                android:textColor="@color/buttonBlue"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:padding="12dp"
-                android:elevation="6dp"
-                android:shape="rectangle"
-                android:layout_marginLeft="16dp"/>
+                <Button
+                    android:id="@+id/btnGuardarCrimen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Guardar Crimen"
+                    android:backgroundTint="@color/primaryBlue"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="12dp"
+                    android:padding="14dp"
+                    android:elevation="6dp"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="@color/primaryBlue"
+                    android:padding="14dp"
+                    android:elevation="6dp"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

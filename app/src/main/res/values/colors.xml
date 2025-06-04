@@ -1,30 +1,21 @@
 <resources>
-    <!-- Colores principales -->
-    <color name="colorAccent">#FF7043</color> <!-- Naranja suave para resaltar elementos importantes -->
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="toolbarColor">#3F51B5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkText">#212121</color>
+    <color name="graySecondary">#757575</color>
+    <color name="lightGray">#F5F5F7</color>
+    <color name="grayHint">#9E9E9E</color>
 
-    <!-- Fondo principal -->
-    <color name="backgroundColor">#F5F5F5</color> <!-- Gris claro, limpio y moderno -->
+    <color name="primaryBlue">#1565C0</color>
+    <color name="buttonBlue">#1E88E5</color>
+    <color name="buttonBlueRipple">#5581C6FF</color>
+    <color name="primaryDarkBlue">#0D47A1</color>
 
-    <!-- Barra de herramientas -->
-    <color name="toolbarColor">#3F51B5</color> <!-- Azul oscuro, da contraste y profesionalismo -->
+    <color name="errorRed">#D32F2F</color>
+    <color name="successGreen">#388E3C</color>
+    <color name="buttonColor">#FF9800</color>
+    <color name="buttonPressedColor">#FB8C00</color>
+    <color name="buttonColorBlue">#0A66AF</color>
 
-    <!-- Colores para texto -->
-    <color name="white">#FFFFFF</color> <!-- Blanco, usado para texto sobre fondos oscuros -->
-    <color name="black">#000000</color> <!-- Negro, para texto importante y contraste -->
-    <color name="textPrimaryColor">#212121</color> <!-- Gris oscuro para el texto principal -->
-    <color name="textSecondaryColor">#757575</color> <!-- Gris suave para texto secundario -->
-
-    <!-- Botones -->
-    <color name="buttonColor">#FF9800</color> <!-- Naranja brillante, atractivo y legible sobre texto blanco -->
-    <color name="buttonPressedColor">#FB8C00</color> <!-- Naranja más oscuro para cuando el botón está presionado -->
-
-    <!-- Divider -->
-    <color name="dividerColor">#BDBDBD</color> <!-- Gris suave para divisores y líneas de separación -->
-
-    <!-- Gris oscuro para textos secundarios -->
-    <color name="darkGray">#616161</color> <!-- Gris oscuro para elementos de texto menos importantes -->
-    <color name="buttonColorBlue">#0A66AF</color> <!-- Azul claro vibrante -->
-    <color name="blue">#2196F3</color>
-    <color name="buttonBlue">#2196F3</color>
-    <color name="darkerGray">#757575</color>
 </resources>

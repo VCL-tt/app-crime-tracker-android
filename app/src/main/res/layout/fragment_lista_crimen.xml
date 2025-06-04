@@ -7,35 +7,29 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:background="@color/toolbarColor"
+        android:paddingVertical="10dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/toolbarColor"
-            android:elevation="8dp"
-            android:minHeight="20dp"
-            app:titleTextColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="56dp"
             android:gravity="center">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Crime Tracker"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="22sp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="Crime Tracker"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -44,25 +38,33 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAgregarCrimen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="Agregar Crimen"
-        android:backgroundTint="@color/buttonBlue"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:layout_margin="16dp"
-        android:elevation="6dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:textSize="16sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/buttonBlue"
+        app:cornerRadius="12dp"
+        android:elevation="8dp"
+        app:rippleColor="@color/buttonBlueRipple" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/crimen_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@android:color/transparent"
         android:scrollbars="vertical" />
 
 </LinearLayout>
