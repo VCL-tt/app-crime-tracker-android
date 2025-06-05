@@ -47,8 +47,7 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_not_resolved"
             android:visibility="gone"
-            android:layout_marginStart="12dp"
-/>
+            android:layout_marginStart="12dp" />
 
         <ImageView
             android:id="@+id/img_resuelto"

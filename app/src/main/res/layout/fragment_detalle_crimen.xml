@@ -115,6 +115,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="24dp">
 
+                <!-- TextView para mostrar la fecha seleccionada -->
                 <TextView
                     android:id="@+id/txtFechaCrimen"
                     android:layout_width="0dp"
@@ -125,16 +126,52 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium" />
 
+                <!-- Icono para seleccionar la fecha -->
                 <ImageView
                     android:id="@+id/iconoFecha"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:src="@drawable/ic_calendar"
                     android:contentDescription="Icono calendario"
-
                     android:layout_marginStart="16dp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@android:color/white"
+                android:elevation="4dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtHoraCrimen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selecciona la hora"
+                    android:textColor="@color/primaryBlue"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
+
+                <ImageView
+                    android:id="@+id/iconoHora"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_alarm_clock"
+                    android:contentDescription="Icono reloj"
+                    android:layout_marginStart="16dp" />
+
+            </LinearLayout>
+
+
 
             <CheckBox
                 android:id="@+id/chk_resuelto"

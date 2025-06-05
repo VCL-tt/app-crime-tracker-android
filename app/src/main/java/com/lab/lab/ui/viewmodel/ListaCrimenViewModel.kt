@@ -19,18 +19,13 @@ class ListaCrimenViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             repository.crimenes.collect { lista ->
-                // Separamos los crímenes de hoy
                 val today = Date()
                 val todayCrimes = lista.filter { isSameDay(it.fecha, today) }
                 val otherCrimes = lista.filterNot { isSameDay(it.fecha, today) }
-
-                // Ordenamos los crímenes de hoy y luego los otros crímenes
                 _crimenes.value = todayCrimes.sortedByDescending { it.fecha } + otherCrimes.sortedByDescending { it.fecha }
             }
         }
     }
-
-    // Función para comparar si dos fechas son del mismo día
     private fun isSameDay(date1: Date, date2: Date): Boolean {
         val calendar1 = Calendar.getInstance()
         calendar1.time = date1
@@ -41,7 +36,6 @@ class ListaCrimenViewModel : ViewModel() {
                 calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH)
     }
 
-    // Agregar un crimen al repositorio
     fun agregarCrimen(crimen: Crimen) {
         viewModelScope.launch {
             try {

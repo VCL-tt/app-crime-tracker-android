@@ -1,7 +1,6 @@
 package com.lab.lab.ui.screens
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,8 +15,11 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
 import com.lab.lab.R
 import com.lab.lab.ui.viewmodel.ListaCrimenViewModel
+import kotlinx.coroutines.launch
 
 class DetalleCrimenFragment : Fragment() {
 
@@ -33,101 +35,68 @@ class DetalleCrimenFragment : Fragment() {
 
     private val viewModel: ListaCrimenViewModel by viewModels()
 
-    private val calendar: Calendar = Calendar.getInstance()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetalleCrimenBinding.inflate(inflater, container, false)
 
-        // Actualizar el título del crimen cuando el texto cambie
         binding.txtTituloCrimen.doOnTextChanged { texto, _, _, _ ->
+
             crimen = crimen.copy(titulo = texto.toString())
         }
 
-        // Mostrar fecha inicial
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        // Mostrar fecha y hora inicial
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         binding.txtFechaCrimen.text = dateFormat.format(crimen.fecha)
 
-        binding.layoutFecha.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(
-                requireContext(),
-                { _, year, monthOfYear, dayOfMonth ->
-                    calendar.set(year, monthOfYear, dayOfMonth)
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        binding.txtHoraCrimen.text = timeFormat.format(crimen.fecha)
 
-                    val timePickerDialog = TimePickerDialog(
-                        requireContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                        { _, hourOfDay, minute ->
-                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                            calendar.set(Calendar.MINUTE, minute)
-                            val selectedDateTime = calendar.time
-
-                            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                            binding.txtFechaCrimen.text = dateFormat.format(selectedDateTime)
-
-                            crimen = crimen.copy(fecha = selectedDateTime)
-                        },
-                        calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE),
-                        true
-                    )
-                    timePickerDialog.show()
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datePickerDialog.show()
+        // Escuchar el cambio de fecha desde el DatePickerFragment
+        viewLifecycleOwner.lifecycleScope.launch {
+            setFragmentResultListener("fechaSeleccionada") { _, bundle ->
+                val fecha = bundle.getSerializable("fecha") as Date
+                // Actualizar la fecha con la fecha seleccionada
+                crimen = crimen.copy(fecha = fecha)
+                binding.txtFechaCrimen.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(fecha)
+            }
         }
 
+        // Escuchar el cambio de hora desde el HoraPickerFragment
+        viewLifecycleOwner.lifecycleScope.launch {
+            setFragmentResultListener("horaSeleccionada") { _, bundle ->
+                val hora = bundle.getSerializable("hora") as Date
+                val newCalendar = Calendar.getInstance()
+                newCalendar.time = crimen.fecha
+                newCalendar.set(Calendar.HOUR_OF_DAY, hora.hours)
+                newCalendar.set(Calendar.MINUTE, hora.minutes)
+
+                // Actualizar la hora
+                crimen = crimen.copy(fecha = newCalendar.time)
+                binding.txtHoraCrimen.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(newCalendar.time)
+            }
+        }
+
+        // Selección de la fecha
         binding.iconoFecha.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(
-                requireContext(),
-                { _, year, monthOfYear, dayOfMonth ->
-                    calendar.set(year, monthOfYear, dayOfMonth)
-
-                    val timePickerDialog = TimePickerDialog(
-                        requireContext(),
-                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                        { _, hourOfDay, minute ->
-                            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                            calendar.set(Calendar.MINUTE, minute)
-                            val selectedDateTime = calendar.time
-
-                            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                            binding.txtFechaCrimen.text = dateFormat.format(selectedDateTime)
-
-                            crimen = crimen.copy(fecha = selectedDateTime)
-                        },
-                        calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE),
-                        true
-                    )
-                    timePickerDialog.show()
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datePickerDialog.show()
+            val datePickerFragment = DatePickerFragment()
+            datePickerFragment.show(parentFragmentManager, "datePicker")
         }
 
-        // Control de cambio en el estado del crimen (resuelto o no)
-        binding.chkResuelto.setOnCheckedChangeListener { _, marcado ->
-            crimen = crimen.copy(resuelto = marcado)
+        // Selección de la hora
+        binding.iconoHora.setOnClickListener {
+            val horaPickerFragment = HoraPickerFragment() // Fragmento de hora
+            horaPickerFragment.show(parentFragmentManager, "horaPicker")
         }
 
         // Botón para guardar el crimen
         binding.btnGuardarCrimen.setOnClickListener {
-            // Verificar si el título está vacío
             if (binding.txtTituloCrimen.text.isNullOrEmpty()) {
-                // Si el título está vacío, mostrar un Snackbar de advertencia
                 Snackbar.make(binding.root, "Por favor ingrese un título para el crimen", Snackbar.LENGTH_SHORT)
                     .show()
             } else {
-                // Si el título no está vacío, procedemos a guardar el crimen
+                // Guardar el crimen con el título actualizado
                 viewModel.agregarCrimen(crimen)
 
                 // Mostrar el Snackbar de confirmación
@@ -135,36 +104,24 @@ class DetalleCrimenFragment : Fragment() {
                     .setAction("Cerrar") {}
                     .show()
 
-                // Redirigir a la lista de crímenes después de guardar usando FragmentTransaction
+                // Redirigir a la lista de crímenes después de guardar
                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment()) // Reemplazar con el fragmento de lista
-                fragmentTransaction.addToBackStack(null) // Permite ir atrás
+                fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment())
+                fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
-
-                Log.d("DetalleCrimenFragment", "Redirigiendo a ListaCrimenFragment")
             }
         }
+        binding.chkResuelto.setOnCheckedChangeListener { _, marcado ->
+            crimen = crimen.copy(resuelto = marcado)
+        }
+
+        // Botón de cancelación
         binding.btnCancelar.setOnClickListener {
-            // Redirigir a la lista de crímenes
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment()) // Reemplazar con el fragmento de lista
-            fragmentTransaction.addToBackStack(null) // Permite ir atrás
+            fragmentTransaction.replace(R.id.nav_host_fragment, ListaCrimenFragment())
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-
-            Log.d("DetalleCrimenFragment", "Redirigiendo a ListaCrimenFragment")
         }
-
-        // Bloquear la navegación con onBackPressed si el título está vacío
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (binding.txtTituloCrimen.text.isNullOrEmpty()) {
-                    Snackbar.make(binding.root, "Por favor ingrese un título", Snackbar.LENGTH_SHORT).show()
-                } else {
-                    // Si el título no está vacío, permitir regresar
-                    requireActivity().onBackPressed()
-                }
-            }
-        })
 
         return binding.root
     }
