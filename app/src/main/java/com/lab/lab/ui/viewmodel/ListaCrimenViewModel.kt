@@ -45,5 +45,29 @@ class ListaCrimenViewModel : ViewModel() {
             }
         }
     }
+    fun eliminarCrimen(crimen: Crimen) {
+        viewModelScope.launch {
+            try {
+                repository.eliminarCrimen(crimen)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+    fun obtenerCrimenPorId(id: UUID, callback: (Crimen?) -> Unit) {
+        viewModelScope.launch {
+            val crimenEncontrado = _crimenes.value.find { it.id == id }
+            callback(crimenEncontrado)
+        }
+    }
+    fun actualizarCrimen(crimen: Crimen) {
+        val listaActual = _crimenes.value.toMutableList()
+        val index = listaActual.indexOfFirst { it.id == crimen.id }
+        if (index != -1) {
+            listaActual[index] = crimen
+            _crimenes.value = listaActual
+        }
+    }
+
 }
 

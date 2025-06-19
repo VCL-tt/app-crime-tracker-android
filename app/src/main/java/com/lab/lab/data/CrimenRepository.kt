@@ -11,6 +11,10 @@ class CrimenRepository(private val dao: CrimenDao) {
     suspend fun ingresarCrimen(crimen: Crimen) {
         dao.insertarCrimen(crimen)
     }
+    suspend fun eliminarCrimen(crimen: Crimen) {
+        dao.eliminar(crimen)
+    }
+
 
     companion object {
         @Volatile

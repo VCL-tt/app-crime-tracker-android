@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:elevation="10dp"
         android:background="@color/toolbarColor"
-        android:paddingVertical="10dp">
+        android:paddingVertical="10dp"
+        android:gravity="center_vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,16 +25,28 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
                 android:text="Crime Tracker"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="24sp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center" />
-
+                android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="@android:color/transparent"
+            android:contentDescription="Volver"
+            android:padding="8dp"
+            android:elevation="12dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
     <TextView

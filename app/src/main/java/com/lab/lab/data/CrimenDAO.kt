@@ -1,6 +1,7 @@
 package com.lab.lab.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -21,5 +22,8 @@ interface CrimenDao {
 
     @Query("DELETE FROM crimen")
     suspend fun borrarTodo()
+
+    @Delete
+    suspend fun eliminar(crimen: Crimen)
 }
 

@@ -56,5 +56,15 @@
             android:src="@drawable/ic_check"
             android:visibility="gone"
             android:layout_marginStart="12dp" />
+        <ImageButton
+            android:id="@+id/btn_eliminar_crimen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Eliminar crimen"
+            android:layout_marginStart="8dp"
+            android:tint="@color/errorRed" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
